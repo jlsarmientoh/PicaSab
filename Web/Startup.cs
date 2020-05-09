@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Javeriana.Pica.Core.Interfaces;
 using Javeriana.Pica.Core.Servicios;
+using Javeriana.Pica.Core.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Web
 {
@@ -29,6 +31,11 @@ namespace Web
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<EscuelaContext>(options =>
+                options
+                .UseSqlServer(Configuration.GetConnectionString("EscuelaConnection"))
+            );
 
         }
 
